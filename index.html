@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Solo Leveling | Fan Site do Anime</title>
+    <title>SoloLeveling | Fan Site do Anime</title>
 
-    <link rel="stylesheet" href="css/base.css?v=4">
-    <link rel="stylesheet" href="css/home.css?v=4">
+    <link rel="stylesheet" href="css/base.css?v=5">
+    <link rel="stylesheet" href="css/home.css?v=5">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -30,8 +30,17 @@
 
         <nav class="header-nav">
             <a href="index.html" class="header-link active">INÍCIO</a>
-            <a href="personagens.html" class="header-link">PERSONAGENS</a>
+            <div class="dropdown">
+                <a href="personagens.html" class="header-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">PERSONAGENS</a>
+                <ul class="dropdown-menu">
+                    <li><a href="sung-jin-woo.html" class="dropdown-item">SUNG JIN-WOO</a></li>
+                    <li><a href="cha-haa-in.html" class="dropdown-item">CHA HAE-IN</a></li>
+                    <li><a href="antares.html" class="dropdown-item">ANTARES</a></li>
+                    <!-- Add more character links here -->
+                </ul>
+            </div>
             <a href="sung-jin-woo.html" class="header-link">SUNG JIN-WOO</a>
+            <a href="guia-sistema.html" class="header-link">GUIA & SISTEMA</a>
         </nav>
 
         <div class="status">
@@ -195,7 +204,14 @@
 
     </footer>
 
-    <script src="js/home.js?v=4"></script>
+    <script src="js/home.js?v=5"></script>
+    <script>
+      // Header glass effect on scroll
+      const hdr = document.querySelector('header');
+      const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    </script>
 
 </body>
 </html>

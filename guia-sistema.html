@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Sistema & Arquivo | Solo Leveling</title>
+
+    <link rel="stylesheet" href="css/base.css?v=5">
+    <link rel="stylesheet" href="css/home.css?v=5">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        .system-hub {
+            padding: 40px 0 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hub-hero {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .hub-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            font-family: var(--f-display);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: var(--c-cyan);
+            background: var(--c-cyan-dim);
+            border: 1px solid var(--c-cyan);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            box-shadow: 0 0 15px var(--c-cyan-glow);
+        }
+
+        .hub-title {
+            font-family: var(--f-display);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+            text-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+        }
+
+        .hub-title span {
+            color: var(--c-cyan);
+        }
+
+        .hub-desc {
+            font-size: 1.15rem;
+            color: var(--c-text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Nav tabs */
+        .hub-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .hub-tab-btn {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            color: var(--c-text-muted);
+            font-family: var(--f-display);
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--ease-std);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hub-tab-btn:hover {
+            border-color: var(--c-cyan);
+            color: var(--c-cyan);
+            background: var(--c-surface-2);
+            box-shadow: 0 0 15px var(--c-cyan-dim);
+        }
+
+        .hub-tab-btn.active {
+            border-color: var(--c-cyan);
+            color: #03070b;
+            background: var(--c-cyan);
+            box-shadow: 0 0 20px var(--c-cyan-glow);
+            font-weight: 700;
+        }
+
+        /* Tab Content */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Grid Cards */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .hub-card {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-md);
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--ease-std);
+            backdrop-filter: blur(12px);
+        }
+
+        .hub-card:hover {
+            border-color: var(--c-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 200, 255, 0.15);
+        }
+
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--c-cyan);
+            box-shadow: 0 0 10px var(--c-cyan);
+        }
+
+        .hub-card.purple::before {
+            background: var(--c-purple);
+            box-shadow: 0 0 10px var(--c-purple);
+        }
+
+        .hub-card.red::before {
+            background: var(--c-red);
+            box-shadow: 0 0 10px var(--c-red);
+        }
+
+        .hub-card.gold::before {
+            background: var(--c-gold);
+            box-shadow: 0 0 10px var(--c-gold);
+        }
+
+        .hub-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .hub-card-title {
+            font-family: var(--f-display);
+            font-size: 1.25rem;
+            color: var(--c-text);
+            letter-spacing: 1px;
+        }
+
+        .hub-card-tag {
+            font-family: var(--f-display);
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--c-border);
+            color: var(--c-cyan);
+        }
+
+        .hub-card-content {
+            color: var(--c-text-muted);
+            font-size: 0.98rem;
+            line-height: 1.6;
+        }
+
+        .hub-card-content ul {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .hub-card-content li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .hub-card-content li::before {
+            content: '›';
+            position: absolute;
+            left: 0;
+            color: var(--c-cyan);
+            font-weight: bold;
+        }
+
+        /* Timeline Changelog */
+        .changelog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .changelog-item {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+            position: relative;
+            transition: var(--ease-std);
+        }
+
+        .changelog-item:hover {
+            border-color: var(--c-border-hover);
+        }
+
+        .changelog-head {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 10px;
+        }
+
+        .changelog-version {
+            font-family: var(--f-display);
+            font-size: 1.15rem;
+            color: var(--c-cyan);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .changelog-badge {
+            font-size: 0.75rem;
+            background: var(--c-cyan-dim);
+            color: var(--c-cyan);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--c-cyan);
+        }
+
+        .changelog-date {
+            font-family: var(--f-ui);
+            font-size: 0.85rem;
+            color: var(--c-text-dim);
+        }
+
+        .changelog-bullets {
+            list-style: none;
+            color: var(--c-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .changelog-bullets li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+        }
+
+        .changelog-bullets li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Quest box */
+        .quest-box {
+            background: rgba(0, 200, 255, 0.05);
+            border: 1px solid var(--c-cyan);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .quest-title {
+            font-family: var(--f-display);
+            font-size: 1.1rem;
+            color: var(--c-cyan);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+    <div class="overlay"></div>
+    <div class="particles"></div>
+    <div class="scanlines"></div>
+
+    <header>
+        <a href="index.html" class="logo">
+            <span>SOLO LEVELING</span>
+            <strong>FAN SITE</strong>
+        </a>
+
+        <nav class="header-nav">
+            <a href="index.html" class="header-link">INÍCIO</a>
+            <a href="personagens.html" class="header-link">PERSONAGENS</a>
+            <a href="sung-jin-woo.html" class="header-link">SUNG JIN-WOO</a>
+            <a href="guia-sistema.html" class="header-link active">GUIA & SISTEMA</a>
+        </nav>
+
+        <div class="status">
+            ONLINE
+            <span></span>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <div class="system-hub">
+
+            <!-- Hero Section -->
+            <div class="hub-hero">
+                <span class="hub-badge">REGISTRO DO SISTEMA · v5.0</span>
+                <h1 class="hub-title">ARQUIVO CENTRAL <span>& GUIA</span></h1>
+                <p class="hub-desc">
+                    Central de inteligência do projeto com todo o histórico de melhorias, regras de combate, arquitetura do Sistema de Solo Leveling e dossiê técnico.
+                </p>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <div class="hub-tabs">
+                <button class="hub-tab-btn active" onclick="switchTab('changelog')">
+                    <span>⚡</span> HISTÓRICO DE MELHORIAS
+                </button>
+                <button class="hub-tab-btn" onclick="switchTab('lore')">
+                    <span>🌌</span> MANUAL DO SISTEMA & LORE
+                </button>
+                <button class="hub-tab-btn" onclick="switchTab('habilidades')">
+                    <span>⚔️</span> ARSENAL & HABILIDADES
+                </button>
+                <button class="hub-tab-btn" onclick="switchTab('tech')">
+                    <span>💻</span> ARQUITETURA TÉCNICA
+                </button>
+            </div>
+
+            <!-- TAB 1: CHANGELOG & MELHORIAS -->
+            <div id="tab-changelog" class="tab-panel active">
+                <div class="changelog-list">
+
+                    <div class="changelog-item">
+                        <div class="changelog-head">
+                            <div class="changelog-version">
+                                <span>FASE 5 — DOCUMENTAÇÃO & CENTRAL DO SISTEMA</span>
+                                <span class="changelog-badge">ATUAL</span>
+                            </div>
+                            <span class="changelog-date">Recente</span>
+                        </div>
+                        <ul class="changelog-bullets">
+                            <li><strong>Criação da Página Central (`guia-sistema.html`)</strong>: Hub interativo consolidando todas as regras, lore, histórico de desenvolvimento e arquitetura.</li>
+                            <li><strong>Atualização Completa do README.md</strong>: Documento detalhado em Markdown com tabelas, badges, visão técnica, guias de execução e histórico completo de melhorias.</li>
+                            <li><strong>Integração Global dos Menus</strong>: Navegação fluida conectando Home, Personagens, Sung Jin-Woo e o Guia do Sistema.</li>
+                        </ul>
+                    </div>
+
+                    <div class="changelog-item">
+                        <div class="changelog-head">
+                            <div class="changelog-version">
+                                <span>FASE 4 — EVOLUÇÃO VISUAL & CSS v5 CYBER-SHADOW</span>
+                                <span class="changelog-badge">DESIGN</span>
+                            </div>
+                            <span class="changelog-date">Recente</span>
+                        </div>
+                        <ul class="changelog-bullets">
+                            <li><strong>Design Tokens & Cores Personalizadas</strong>: Paleta baseada em Mana Cyan (<code>#00c8ff</code>), Sombra Púrpura (<code>#8b5cf6</code>), Alerta Vermelho (<code>#ff0040</code>) e Ouro Rank Nacional (<code>#ffd700</code>).</li>
+                            <li><strong>Efeitos Holográficos</strong>: Linhas de varredura CRT (Scanlines), partículas flutuantes e backgrounds com animação suave de iluminação.</li>
+                            <li><strong>Tipografia Sci-Fi de Alto Impacto</strong>: Combinação de Orbitron para títulos e HUDs e Rajdhani para leitura de dados e atributos RPG.</li>
+                        </ul>
+                    </div>
+
+                    <div class="changelog-item">
+                        <div class="changelog-head">
+                            <div class="changelog-version">
+                                <span>FASE 3 — BANCO DE DADOS EXPANDIDO DE PERSONAGENS</span>
+                                <span class="changelog-badge">CATÁLOGO</span>
+                            </div>
+                            <span class="changelog-date">Concluído</span>
+                        </div>
+                        <ul class="changelog-bullets">
+                            <li><strong>Mais de 15 Personagens Mapeados</strong>: Sung Jin-Woo, Cha Hae-In, Sung Su-Ho, Choi Jong-In, Baek Yoon-Ho, Thomas Andre, Goto Ryuji, Antares, O Arquiteto, Igris, Beru, Kamish e mais.</li>
+                            <li><strong>Filtros Instantâneos em JavaScript</strong>: Alternância ágil entre Protagonistas, Antagonistas, Caçadores, Sombras e Monarcas.</li>
+                            <li><strong>Cards RPG com Status</strong>: Badges de Rank (E a Nacional), atributos (FOR, AGI, VIT) e descrições personalizadas.</li>
+                        </ul>
+                    </div>
+
+                    <div class="changelog-item">
+                        <div class="changelog-head">
+                            <div class="changelog-version">
+                                <span>FASE 2 — INTERFACE DO SISTEMA & EXPERIÊNCIA DO MONARCA</span>
+                                <span class="changelog-badge">SISTEMA</span>
+                            </div>
+                            <span class="changelog-date">Concluído</span>
+                        </div>
+                        <ul class="changelog-bullets">
+                            <li><strong>HUD Holográfico em `sung-jin-woo.html`</strong>: Janela modal idêntica à do manhwa com atributos detalhados (HP/MP, Força, Agilidade, Vitalidade, Sentido, Inteligência).</li>
+                            <li><strong>Sidebar Interativa</strong>: Navegação por tópicos dinâmicos com transição fluida de imagens e conteúdos.</li>
+                            <li><strong>Contadores Animados na Home</strong>: Animações de contagem numérica acionadas dinamicamente via <code>IntersectionObserver</code>.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 2: MANUAL DO SISTEMA & LORE -->
+            <div id="tab-lore" class="tab-panel">
+                <div class="grid-cards">
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">O QUE É O SISTEMA?</h3>
+                            <span class="hub-card-tag">ARQUITETO</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>O Sistema é um programa mágico arquitetado pelo <strong>Arquiteto</strong> para adaptar um corpo humano mortal para herdar os poderes inimagináveis de <strong>Ashborn</strong>, o Monarca das Sombras.</p>
+                            <ul>
+                                <li>Leveling infinito através de missões e dungeons</li>
+                                <li>Interface holográfica visível apenas ao jogador</li>
+                                <li>Recompensas, inventário dimensional e loja mágica</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card purple">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">CLASSIFICAÇÃO DE CAÇADORES</h3>
+                            <span class="hub-card-tag">RANKS</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>Após o despertar, o nível de mana de um caçador comum é fixo para sempre:</p>
+                            <ul>
+                                <li><strong>Rank E a C:</strong> Caçadores de suporte e incursões de baixo risco</li>
+                                <li><strong>Rank B e A:</strong> A espinha dorsal das maiores guildas mundiais</li>
+                                <li><strong>Rank S:</strong> Força capaz de alterar o rumo de nações</li>
+                                <li><strong>Nível Nacional:</strong> Caçadores que sobreviveram à Primeira Incursão de Kamish</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card red">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">TIPOS DE PORTAIS (GATES)</h3>
+                            <span class="hub-card-tag">DUNGEONS</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>Fendas dimensionais que conectam o mundo humano ao reino dos monstros:</p>
+                            <ul>
+                                <li><strong>Portal Azul Comum:</strong> Pode ser explorado e fechado em até 7 dias</li>
+                                <li><strong>Portal Vermelho:</strong> Entrada trancada até a eliminação do chefe do calabouço</li>
+                                <li><strong>Dungeon Duplo:</strong> Templo escondido que iniciou a lenda do jogador</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card gold">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">MONARCAS VS GOVERNANTES</h3>
+                            <span class="hub-card-tag">GUERRA ANCESTRAL</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>O conflito eterno entre os <strong>Monarcas</strong> (criados da escuridão para destruir) e os <strong>Governantes</strong> (criados da luz para preservar o universo).</p>
+                            <ul>
+                                <li>Antares — Monarca da Destruição</li>
+                                <li>Ashborn — Maior Monarca & Ex-Governante</li>
+                                <li>A Terra se tornou o campo de batalha final</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 3: HABILIDADES & ARSENAL -->
+            <div id="tab-habilidades" class="tab-panel">
+
+                <div class="quest-box">
+                    <div class="quest-title">
+                        <span>📜</span> MISSÃO DIÁRIA — PREPARAÇÃO PARA FICAR MAIS FORTE
+                    </div>
+                    <p style="color: var(--c-text-muted); margin-bottom: 12px;">Objetivo obrigatório diário fornecido pelo Sistema sob pena de transferência para a Zona de Punição:</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; color: var(--c-cyan);">
+                        <div>[✓] 100 Flexões</div>
+                        <div>[✓] 100 Abdominais</div>
+                        <div>[✓] 100 Agachamentos</div>
+                        <div>[✓] Corrida de 10km</div>
+                    </div>
+                </div>
+
+                <div class="grid-cards">
+
+                    <div class="hub-card purple">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">EXTRAÇÃO DE SOMBRAS (ARISE)</h3>
+                            <span class="hub-card-tag">HABILIDADE DE CLASSE</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>Permite extrair a sombra de inimigos derrotados e transformá-los em soldados leais que mantêm seus poderes e sobem de nível com o Monarca.</p>
+                            <ul>
+                                <li>3 tentativas de extração por alvo</li>
+                                <li>Preserva as habilidades de combate do original</li>
+                                <li>Regeneração ilimitada enquanto houver mana</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">TOQUE DO DOMINADOR</h3>
+                            <span class="hub-card-tag">AUTORIDADE</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>Controle telecinético absoluto sobre a matéria sem qualquer custo de mana. Permite arremessar inimigos colossais ou puxar armas à distância com precisão cirúrgica.</p>
+                        </div>
+                    </div>
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">TROCA DE SOMBRAS</h3>
+                            <span class="hub-card-tag">TELETRANSPORTE</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>O Monarca pode trocar de lugar instantaneamente com qualquer soldado sombra posicionado em qualquer lugar do globo terrestre ou dimensões conectadas.</p>
+                        </div>
+                    </div>
+
+                    <div class="hub-card gold">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">ARSENAL DE ADAGAS</h3>
+                            <span class="hub-card-tag">EQUIPAMENTO</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <ul>
+                                <li><strong>Presa de Rasaka:</strong> Causa paralisia e sangramento</li>
+                                <li><strong>Adaga do Rei Demônio:</strong> Gera tempestades de relâmpagos</li>
+                                <li><strong>Ira de Kamish:</strong> Forjada com a presa do dragão mais poderoso da história</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TAB 4: ARQUITETURA TÉCNICA -->
+            <div id="tab-tech" class="tab-panel">
+                <div class="grid-cards">
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">ESTRUTURA MODULAR</h3>
+                            <span class="hub-card-tag">ARQUITETURA</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>O projeto segue um padrão desacoplado, sem frameworks pesados, garantindo carregamento instantâneo:</p>
+                            <ul>
+                                <li><code>base.css</code>: Sistema central de tokens, resets e animações</li>
+                                <li><code>home.css</code>, <code>personagens.css</code>, <code>sung.css</code>: Estilos específicos por página</li>
+                                <li><code>home.js</code>, <code>personagens.js</code>, <code>sung.js</code>: Lógica e eventos segregados</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">DESIGN SYSTEM</h3>
+                            <span class="hub-card-tag">CSS TOKENS</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <p>Construído integralmente com variáveis CSS (Custom Properties), garantindo consistência em toda a interface:</p>
+                            <ul>
+                                <li>Espaçamentos e raios padronizados (<code>--radius-sm</code>, <code>--radius-md</code>)</li>
+                                <li>Curvas de animação consistentes (<code>cubic-bezier</code>)</li>
+                                <li>Filtros de vidro fosco (<code>backdrop-filter</code>) otimizados para GPU</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="hub-card">
+                        <div class="hub-card-header">
+                            <h3 class="hub-card-title">PERFORMANCE & ACESSIBILIDADE</h3>
+                            <span class="hub-card-tag">BOAS PRÁTICAS</span>
+                        </div>
+                        <div class="hub-card-content">
+                            <ul>
+                                <li>HTML5 semântico com navegação estruturada</li>
+                                <li>Listeners de scroll passivos para 60 FPS estáveis</li>
+                                <li>Responsividade completa (Mobile, Tablet e Desktop Ultra-wide)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>SOLO LEVELING — projeto de fã sem afiliação oficial.</p>
+        <p>História original de Chugong · Webtoon por DUBU · Anime por A-1 Pictures</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Update buttons
+            document.querySelectorAll('.hub-tab-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(document.querySelectorAll('.hub-tab-btn')).find(b => b.getAttribute('onclick').includes(tabName));
+            if (activeBtn) activeBtn.classList.add('active');
+
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            const targetPanel = document.getElementById('tab-' + tabName);
+            if (targetPanel) targetPanel.classList.add('active');
+        }
+
+        // Header scroll effect
+        const hdr = document.querySelector('header');
+        const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 20);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    </script>
+</body>
+</html>

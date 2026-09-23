@@ -9,7 +9,7 @@ Sung Jin-Woo | Solo Leveling
 </title>
 
     <link rel="stylesheet" href="css/base.css?v=4">
-    <link rel="stylesheet" href="css/sung.css?v=4">
+    <link rel="stylesheet" href="css/sung.css?v=5">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@ Sung Jin-Woo | Solo Leveling
         <a href="index.html" class="header-link">INÍCIO</a>
         <a href="personagens.html" class="header-link">PERSONAGENS</a>
         <a href="sung-jin-woo.html" class="header-link active">SUNG JIN-WOO</a>
+        <a href="guia-sistema.html" class="header-link">GUIA & SISTEMA</a>
     </nav>
 
     <div class="status">
@@ -118,15 +119,14 @@ Sung Jin-Woo | Solo Leveling
             <span class="tag">NÍVEL 146</span>
         </div>
 
-        <button class="system-button" id="enterSystem">
-            ENTRAR NO SISTEMA
-            <span>&rarr;</span>
-        </button>
-
     </section>
 
 
-    <aside class="panel">
+    <aside class="panel slider" id="panelSlider">
+
+        <div class="panel-dots" id="panelDots"></div>
+
+        <div class="panel-track">
 
         <div class="panel-content active-panel" id="profile">
 
@@ -356,6 +356,8 @@ Sung Jin-Woo | Solo Leveling
 
         </div>
 
+        </div>
+
     </aside>
 
 
@@ -388,37 +390,7 @@ Sung Jin-Woo | Solo Leveling
 </div>
 
 
-<div class="page" id="page-system">
-
-<button class="system-back" id="systemBack">&#10005; VOLTAR</button>
-
-<div class="system-container">
-
-    <div class="system-content">
-
-        <p class="system-indicator">
-            <span id="sysIndex">01 / 05</span>
-        </p>
-
-        <span class="system-eyebrow" id="sysEyebrow">IDENTIDADE</span>
-        <h2 id="sysTitle">PERFIL</h2>
-        <p class="system-desc" id="sysDesc"></p>
-
-    </div>
-
-    <div class="system-image">
-        <img id="sysImage" src="img/sung1.png" alt="Sung Jin-Woo">
-    </div>
-
-</div>
-
-<button class="system-arrow prev" id="prevTopic">&#8249;</button>
-<button class="system-arrow next" id="nextTopic">&#8250;</button>
-
-    </div>
-
-
-    <script src="js/sung.js?v=4"></script>
+    <script src="js/sung.js?v=5"></script>
 
 </body>
 </html>

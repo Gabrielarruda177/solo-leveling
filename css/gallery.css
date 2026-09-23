@@ -1,0 +1,77 @@
+/* css/gallery.css */
+/* Premium gallery layout with glassmorphism and subtle animations */
+
+:root {
+  --primary-bg: hsl(220, 10%, 10%);
+  --card-bg: hsla(220, 10%, 12%, 0.8);
+  --accent: hsl(280, 70%, 60%);
+  --text-primary: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 70%);
+}
+
+body {
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.gallery-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px) saturate(150%);
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+}
+
+.gallery-card .char-avatar-glow {
+  background: linear-gradient(135deg, var(--accent), transparent);
+  opacity: 0.6;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gallery-card h3 {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.gallery-card .char-class {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.gallery-card .char-stats {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.gallery-card .char-desc {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

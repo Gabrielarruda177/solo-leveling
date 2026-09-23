@@ -1,103 +1,91 @@
 const navItems = document.querySelectorAll(".nav-item");
 const panels = document.querySelectorAll(".panel-content");
+const panelTrack = document.querySelector(".panel-track");
+const panelSlider = document.getElementById("panelSlider");
+const panelDots = document.getElementById("panelDots");
 const characterImage = document.querySelector(".character-image");
-const defaultImage = "img/solo.png";
+const defaultImage = "img/sung1.png";
 
-const pages = document.querySelectorAll(".page");
-
-const systemPage = document.getElementById("page-system");
-const sysContent = document.querySelector(".system-content");
-const sysImage = document.getElementById("sysImage");
-const sysEyebrow = document.getElementById("sysEyebrow");
-const sysTitle = document.getElementById("sysTitle");
-const sysDesc = document.getElementById("sysDesc");
-const sysIndex = document.getElementById("sysIndex");
-const enterSystem = document.getElementById("enterSystem");
-const systemBack = document.getElementById("systemBack");
-const prevTopicBtn = document.getElementById("prevTopic");
-const nextTopicBtn = document.getElementById("nextTopic");
-
-const topicosDetalhes = [
-    {
-        eyebrow: "IDENTIDADE",
-        titulo: "PERFIL",
-        descricao: "Sung Jin-Woo, caçador rank S da Guilda Ahjin. O primeiro humano a despertar como jogador do Sistema e herdeiro do trono do Monarca das Sombras."
-    },
-    {
-        eyebrow: "ANÁLISE DE COMBATE",
-        titulo: "ATRIBUTOS",
-        descricao: "Nenhum limite mensurável restante. Força, agilidade, vitalidade, inteligência e percepção continuam subindo a cada dia, quebrando o teto imposto pelo Sistema original."
-    },
-    {
-        eyebrow: "ARSENAL",
-        titulo: "HABILIDADES",
-        descricao: "Do comando supremo ERGAM-SE, que ergue exércitos inteiros das trevas, às habilidades de furtividade e domínio que fazem dele o caçador mais completo já registrado."
-    },
-    {
-        eyebrow: "EXÉRCITO DAS SOMBRAS",
-        titulo: "SOMBRAS",
-        descricao: "Igris, Beru, Iron, Tusk, Kamish e Greed: generais e cavaleiros extraídos dos inimigos mais poderosos já derrotados, prontos para surgirem sempre que seu mestre ordenar."
-    },
-    {
-        eyebrow: "CURIOSIDADE",
-        titulo: "HISTÓRIA",
-        descricao: "Antes do despertar, Jin-Woo era conhecido como o caçador mais fraco do mundo. Após sobreviver ao Templo do Duplo Calabouço, o Sistema o escolheu — e nada voltou a ser igual."
-    }
-];
-
-let indiceAtual = 0;
-let trocaTimeout = null;
+const accents = {
+    profile: { accent: "#00c8ff", soft: "rgba(0, 200, 255, 0.06)" },
+    stats:   { accent: "#8b5cf6", soft: "rgba(139, 92, 246, 0.08)" },
+    skills:  { accent: "#ff0040", soft: "rgba(255, 0, 64, 0.07)" },
+    shadows: { accent: "#aab4bc", soft: "rgba(170, 180, 188, 0.08)" },
+    story:   { accent: "#ffd700", soft: "rgba(255, 215, 0, 0.07)" }
+};
 
 
-function irParaPagina(id) {
+function criarDots() {
 
-    pages.forEach(p => p.classList.remove("active"));
+    if (!panelDots) return;
 
-    const destino = document.getElementById(id);
+    panels.forEach(panel => {
+        const dot = document.createElement("span");
 
-    if (destino) {
-        destino.classList.add("active");
-    }
+        if (panel.classList.contains("active-panel")) {
+            dot.classList.add("active");
+        }
+
+        panelDots.appendChild(dot);
+    });
 
 }
 
 
-function abrirTopico(index, trocarPagina = true) {
+function selecionarTopico(section) {
 
-    const total = navItems.length;
+    const item = document.querySelector(
+        '.nav-item[data-section="' + section + '"]'
+    );
 
-    indiceAtual = ((index % total) + total) % total;
+    navItems.forEach(nav => nav.classList.remove("active"));
 
-    navItems.forEach((nav, i) => {
-        nav.classList.toggle("active", i === indiceAtual);
-    });
+    if (item) {
+        item.classList.add("active");
+    }
 
-    const item = navItems[indiceAtual];
-    const dados = topicosDetalhes[indiceAtual];
+    const panelsArr = Array.from(panels);
+    const indice = panelsArr.findIndex(panel => panel.id === section);
 
-    if (trocaTimeout) clearTimeout(trocaTimeout);
+    if (indice !== -1) {
 
-    sysImage.style.opacity = "0";
-    sysContent.style.opacity = "0";
+        panelsArr.forEach(panel => panel.classList.remove("active-panel"));
+        panelsArr[indice].classList.add("active-panel");
 
-    trocaTimeout = setTimeout(() => {
+        if (panelTrack) {
+            panelTrack.style.transform =
+                "translateX(-" + (indice * 20) + "%)";
+        }
 
-        sysImage.src = item.dataset.image || defaultImage;
-        sysEyebrow.textContent = dados.eyebrow;
-        sysTitle.textContent = dados.titulo;
-        sysDesc.textContent = dados.descricao;
-        sysIndex.textContent =
-            String(indiceAtual + 1).padStart(2, "0") +
-            " / " +
-            String(total).padStart(2, "0");
+        if (panelDots) {
+            const dots = panelDots.querySelectorAll("span");
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === indice);
+            });
+        }
 
-        sysImage.style.opacity = "1";
-        sysContent.style.opacity = "1";
+    }
 
-    }, 250);
+    const tema = accents[section] || accents.profile;
 
-    if (trocarPagina) {
-        irParaPagina("page-system");
+    if (panelSlider) {
+        panelSlider.style.setProperty("--panel-accent", tema.accent);
+        panelSlider.style.setProperty("--panel-soft", tema.soft);
+    }
+
+    if (characterImage) {
+
+        const novaImagem = item.dataset.image || defaultImage;
+
+        if (!characterImage.src.endsWith(novaImagem)) {
+            characterImage.style.opacity = "0";
+
+            setTimeout(() => {
+                characterImage.src = novaImagem;
+                characterImage.style.opacity = "1";
+            }, 400);
+        }
+
     }
 
 }
@@ -106,71 +94,13 @@ function abrirTopico(index, trocarPagina = true) {
 navItems.forEach(item => {
 
     item.addEventListener("click", () => {
-
-        const section = item.dataset.section;
-
-        navItems.forEach(nav => nav.classList.remove("active"));
-        item.classList.add("active");
-
-        panels.forEach(panel => panel.classList.remove("active-panel"));
-
-        const selectedPanel = document.getElementById(section);
-
-        if (selectedPanel) {
-            selectedPanel.classList.add("active-panel");
-        }
-
-        if (characterImage) {
-
-            const novaImagem = item.dataset.image || defaultImage;
-
-            if (!characterImage.src.endsWith(novaImagem)) {
-                characterImage.style.opacity = "0";
-
-                setTimeout(() => {
-                    characterImage.src = novaImagem;
-                    characterImage.style.opacity = "1";
-                }, 400);
-            }
-
-        }
-
+        selecionarTopico(item.dataset.section);
     });
 
 });
 
 
-enterSystem.addEventListener("click", () => {
-    abrirTopico(0);
-});
-
-
-if (systemBack) {
-    systemBack.addEventListener("click", () => {
-        irParaPagina("page-home");
-    });
-}
-
-
-if (prevTopicBtn) {
-    prevTopicBtn.addEventListener("click", () => {
-        abrirTopico(indiceAtual - 1, false);
-    });
-}
-
-
-if (nextTopicBtn) {
-    nextTopicBtn.addEventListener("click", () => {
-        abrirTopico(indiceAtual + 1, false);
-    });
-}
-
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && systemPage.classList.contains("active")) {
-        irParaPagina("page-home");
-    }
-});
+criarDots();
 
 
 const character = document.querySelector(".character-image");
@@ -188,6 +118,7 @@ if (character) {
     });
 
 }
+
 
 const heroH1 = document.querySelector(".hero-content h1");
 

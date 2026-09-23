@@ -8,12 +8,12 @@
 Personagens | Solo Leveling
 </title>
 
-    <link rel="stylesheet" href="css/base.css?v=4">
-    <link rel="stylesheet" href="css/personagens.css?v=4">
+    <link rel="stylesheet" href="css/base.css?v=5">
+    <link rel="stylesheet" href="css/personagens.css?v=5">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -34,6 +34,7 @@ Personagens | Solo Leveling
         <a href="index.html" class="header-link">INÍCIO</a>
         <a href="personagens.html" class="header-link active">PERSONAGENS</a>
         <a href="sung-jin-woo.html" class="header-link">SUNG JIN-WOO</a>
+        <a href="guia-sistema.html" class="header-link">GUIA & SISTEMA</a>
     </nav>
 
     <div class="status">
@@ -61,9 +62,9 @@ Personagens | Solo Leveling
         <button class="filter-btn" data-filter="monarch">MONARCAS</button>
     </div>
 
-    <div class="characters-grid" id="charactersGrid">
+    <div class="gallery-grid" id="charactersGrid">
 
-        <div class="char-card" data-category="protagonist" data-name="Sung Jin-Woo">
+        <div class="gallery-card"><div class="char-card" data-category="protagonist" data-name="Sung Jin-Woo">
             <div class="char-card-inner">
                 <div class="char-rank rank-s">S</div>
                 <div class="char-avatar">
@@ -79,7 +80,7 @@ Personagens | Solo Leveling
                 </div>
                 <p class="char-desc">O caçador mais fraco que se tornou a existência mais forte. Hospedeiro do poder do Monarca das Sombras.</p>
             </div>
-        </div>
+        </div></div>
 
         <div class="char-card" data-category="protagonist" data-name="Cha Hae-In">
             <div class="char-card-inner">
@@ -427,6 +428,85 @@ Personagens | Solo Leveling
 
 </div>
 
+
+<div class="char-showcase" id="charShowcase">
+
+    <button class="showcase-back" id="showcaseBack" type="button">&#10005; VOLTAR</button>
+
+    <div class="showcase-inner" id="showcaseInner">
+
+        <div class="showcase-view showcase-hero">
+
+            <div class="showcase-bg" id="showcaseBg"></div>
+
+            <div class="showcase-content" id="showcaseHeroContent">
+
+                <p class="showcase-index"><span id="showcaseIndex">01 / 20</span></p>
+                <span class="showcase-eyebrow" id="showcaseCategory">PROTAGONISTA</span>
+                <h2 class="showcase-name" id="showcaseName">SUNG JIN-WOO</h2>
+                <p class="showcase-rank" id="showcaseRank">RANK S</p>
+                <p class="showcase-title" id="showcaseTitle">Monarca das Sombras</p>
+                <p class="showcase-desc" id="showcaseDesc"></p>
+
+                <button class="showcase-info-btn" id="showcaseInfoBtn" type="button">
+                    VER DETALHES <span>&rarr;</span>
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="showcase-view showcase-details">
+
+            <div class="showcase-details-bg" id="showcaseDetailsBg"></div>
+
+            <div class="showcase-portrait" id="showcasePortrait">&#9876;</div>
+
+            <div class="showcase-content showcase-details-content" id="showcaseDetailsContent">
+
+                <div class="showcase-stats" id="showcaseStatsMenu">
+
+                    <div class="stat-trigger" data-stat="FOR">
+                        <span>FOR</span>
+                        <h3>98</h3>
+                    </div>
+
+                    <div class="stat-trigger" data-stat="AGI">
+                        <span>AGI</span>
+                        <h3>94</h3>
+                    </div>
+
+                    <div class="stat-trigger" data-stat="VIT">
+                        <span>VIT</span>
+                        <h3>91</h3>
+                    </div>
+
+                </div>
+
+                <div class="showcase-info-box">
+                    <h3 class="info-box-header" id="showcaseInfoHeader">DETALHES</h3>
+                    <p class="info-box-text" id="showcaseInfoText">
+                        Passe o cursor sobre FOR, AGI e VIT para inspecionar os atributos.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="curiosity-box" id="showcaseCuriosityBox">
+                <h3>CURIOSIDADE</h3>
+                <p class="curiosity-text" id="showcaseCuriosity"></p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <button class="showcase-arrow prev" id="showcasePrev" type="button">&#8249;</button>
+    <button class="showcase-arrow next" id="showcaseNext" type="button">&#8250;</button>
+
+</div>
+
+
 <footer class="site-footer">
 
     <p>SOLO LEVELING — projeto de fã sem afiliação oficial.</p>
@@ -435,18 +515,13 @@ Personagens | Solo Leveling
 </footer>
 
 
-    <div class="dev-modal" id="devModal">
-
-        <div class="dev-modal-box">
-            <p class="dev-modal-eyebrow">AVISO DO SISTEMA</p>
-            <h2 class="dev-modal-title">EM DESENVOLVIMENTO</h2>
-            <p class="dev-modal-text">Esta seção ainda está sendo construída. Novos caçadores, filtros e detalhes serão adicionados em breve.</p>
-            <button class="dev-modal-btn" id="devModalClose" type="button">ENTENDIDO</button>
-        </div>
-
-    </div>
-
-    <script src="js/personagens.js?v=4"></script>
+    <script src="js/personagens.js?v=5"></script>
+    <script>
+      const hdr = document.querySelector('header');
+      const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 20);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    </script>
 
 </body>
 </html>
